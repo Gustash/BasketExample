@@ -106,7 +106,7 @@ namespace BasketTask.Test
         }
 
         [TestMethod]
-        public void TestOfferVoucherNotApplyToPurchasedGiftVouchers()
+        public void TestBasket5()
         {
             string expectedFinalValue = "55.00";
             int expectedMessageNum = 1;
