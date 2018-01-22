@@ -200,5 +200,70 @@ namespace BasketTask.Test
             Assert.AreEqual(expectedMessageNum, actualMessages.Count);
             Assert.AreEqual(expectedMessage, actualMessages[0]);
         }
+
+        [TestMethod]
+        public void TestNegativeValueCartGiftVoucher()
+        {
+            string expectedFinalValue = "0.00";
+            int expectedMessageNum = 0;
+
+            Item hat = new Item("Hat", 500, Categories.Clothing);
+
+            GiftVoucher voucher = new GiftVoucher(2000);
+
+            ShoppingCart cart = new ShoppingCart();
+            cart.AddItem(hat, 1);
+            cart.ApplyVoucher(voucher);
+
+            string actualFinalValue = cart.FinalValue;
+            List<string> actualMessages = cart.Messages;
+
+            Assert.AreEqual(expectedFinalValue, actualFinalValue);
+            Assert.AreEqual(expectedMessageNum, actualMessages.Count);
+        }
+
+        [TestMethod]
+        public void TestNegativeValueCartOfferVoucher()
+        {
+            string expectedFinalValue = "0.00";
+            int expectedMessageNum = 0;
+
+            Item hat = new Item("Hat", 1000, Categories.Clothing);
+
+            OfferVoucher voucher = new OfferVoucher(2000, 500);
+
+            ShoppingCart cart = new ShoppingCart();
+            cart.AddItem(hat, 1);
+            cart.ApplyVoucher(voucher);
+
+            string actualFinalValue = cart.FinalValue;
+            List<string> actualMessages = cart.Messages;
+
+            Assert.AreEqual(expectedFinalValue, actualFinalValue);
+            Assert.AreEqual(expectedMessageNum, actualMessages.Count);
+        }
+
+        [TestMethod]
+        public void TestNegativeValueCartOfferAndGiftVoucher()
+        {
+            string expectedFinalValue = "0.00";
+            int expectedMessageNum = 0;
+
+            Item hat = new Item("Hat", 1500, Categories.Clothing);
+
+            OfferVoucher voucher1 = new OfferVoucher(400, 1000);
+            GiftVoucher voucher2 = new GiftVoucher(2000);
+
+            ShoppingCart cart = new ShoppingCart();
+            cart.AddItem(hat, 1);
+            cart.ApplyVoucher(voucher1);
+            cart.ApplyVoucher(voucher2);
+
+            string actualFinalValue = cart.FinalValue;
+            List<string> actualMessages = cart.Messages;
+
+            Assert.AreEqual(expectedFinalValue, actualFinalValue);
+            Assert.AreEqual(expectedMessageNum, actualMessages.Count);
+        }
     }
 }
